@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "allowJs": false,
+    "module": "commonjs",
+    "target": "es5",
+    "jsx": "react",
+    "outDir": "dist",
+    "moduleResolution": "node",
+    "removeComments": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "preserveConstEnums": true,
+    "esModuleInterop": true,
+    "declaration": true,
+    "declarationDir": "./types/",
+    "strict": true,
+    "skipLibCheck": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"]
+    }
+  },
+  "include": ["src/**/*", "index.d.ts"],
+  "exclude": ["node_modules/**/*"]
+}

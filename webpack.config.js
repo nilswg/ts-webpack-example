@@ -9,7 +9,7 @@ module.exports = {
     devtool: 'inline-source-map',
     // source code 所在的位置
     entry: {
-        index: ['./src/index.tsx', './src/index.ts'],
+        index: './src/index.tsx',
     },
     output: {
         // 打包後的檔案名稱
@@ -34,6 +34,9 @@ module.exports = {
     },
     // 嘗試副檔名
     resolve: {
+        alias: {
+            '@': path.resolve(__dirname, 'src/'),
+        },
         extensions: ['.tsx', '.ts', '.js'],
     },
     plugins: [
