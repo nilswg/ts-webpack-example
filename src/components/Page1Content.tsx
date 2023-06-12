@@ -1,15 +1,6 @@
 import React, { useState } from 'react';
-import BigImage from '@/public/wallpaper.jpg';
 
-export const Page1Content: React.FC = () => {
-    return (
-        <div>
-            <MyWallPaper />
-        </div>
-    );
-};
-
-const MyWallPaper: React.FC = () => {
+const Page1Content: React.FC = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     const handleImageLoad = () => {
@@ -17,14 +8,18 @@ const MyWallPaper: React.FC = () => {
     };
 
     return (
-        <>
-            {isLoading && <div>Loading...</div>}
+        <div>
+            {isLoading ? 'is Loading...' : ''}
             <img
-                src={BigImage}
+                src={require('@/public/images/wallpaper.jpg')}
                 alt="Image"
                 onLoad={handleImageLoad}
-                style={{ display: isLoading ? 'none' : 'block' }}
+                width={800}
+                height={600}
+                style={isLoading ? { display: 'none' } : {}}
             />
-        </>
+        </div>
     );
 };
+
+export default Page1Content;
