@@ -9,7 +9,7 @@ const Page1Content: React.FC = () => {
 
     return (
         <div>
-            {isLoading ? 'is Loading...' : ''}
+            {isLoading ? '正在載入圖片...' : ''}
             <img
                 src={require('@/public/images/wallpaper.jpg')}
                 alt="Image"

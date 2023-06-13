@@ -6,7 +6,7 @@ export const Page1: React.FC = () => {
     return (
         <div>
             <h1>Page1</h1>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<div>正在載入組件...</div>}>
                 <LazyPage1Content />
             </Suspense>
         </div>
