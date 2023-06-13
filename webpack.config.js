@@ -9,7 +9,7 @@ module.exports = {
     devtool: 'inline-source-map',
     // source code 所在的位置
     entry: {
-        index: ['./src/index.tsx', './src/index.ts'],
+        index: './src/index.ts',
     },
     output: {
         // 打包後的檔案名稱
