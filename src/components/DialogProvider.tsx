@@ -51,7 +51,8 @@ export const DialogProvider: React.FC<Props_DialogProvider> = ({ children }) => 
                     },
                 }),
                 [isOpen, message],
-            )}>
+            )}
+        >
             {children}
         </DialogContext.Provider>
     );

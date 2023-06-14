@@ -1,6 +1,6 @@
-import React from 'react';
 import { withDialog } from '@/components/DialogProvider';
 import { DialogView } from '@/components/DialogView';
+import React from 'react';
 
 const Page2Content: React.FC = withDialog((props) => {
     return (

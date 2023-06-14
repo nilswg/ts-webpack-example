@@ -40,7 +40,6 @@ type Props_Navigator = {
 const isMobile = true;
 
 const Navigator: React.FC<Props_Navigator> = ({ children }) => {
-
     const modifiedChildren = React.Children.map(children, (child, index) => {
         // if (index === 0 && React.isValidElement<{ style: React.CSSProperties }>(child)) {
         //     // 如果是第一個子元件，就把它變成紅色s
@@ -48,9 +47,7 @@ const Navigator: React.FC<Props_Navigator> = ({ children }) => {
         // }
 
         if (isMobile) {
-
-        }else {
-            
+        } else {
         }
 
         return child;
