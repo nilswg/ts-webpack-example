@@ -12,7 +12,7 @@ const Page1Content: React.FC = () => {
             {isLoading ? '正在載入圖片...' : ''}
             <img
                 src={require('@/public/images/wallpaper.jpg')}
-                alt="Image"
+                alt="4mb-wallpaper.jpg"
                 onLoad={handleImageLoad}
                 width={800}
                 height={600}
