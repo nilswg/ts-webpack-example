@@ -15,10 +15,10 @@ export const App: React.FC = () => {
 
     return (
         <BrowserRouter>
-            <nav>
-                <ul>
+            <nav className="bg-black">
+                <ul className="mt-1 flex pr-1">
                     {routes.map(({ url, name }) => (
-                        <li key={url}>
+                        <li key={url} className="p-3 text-white hover:bg-slate-100 hover:text-black">
                             <Link to={url}>{name}</Link>
                         </li>
                     ))}
