@@ -9,7 +9,7 @@
     ],
     "scripts": {
         "dev": "concurrently -n webpack,tailwind \"npm run webpack:serve\" \"npm run tailwind\"",
-        "webpack:serve":"webpack serve --config webpack.config.js",
+        "webpack:serve": "webpack serve --config webpack.config.js",
         "test": "jest",
         "tailwind": "npx tailwindcss -i ./src/styles/global.css -o ./src/index.css --watch"
     },
@@ -40,6 +40,8 @@
         "css-loader": "^6.8.1",
         "html-webpack-plugin": "^5.5.3",
         "jest": "^29.5.0",
+        "prettier-plugin-organize-imports": "^3.2.2",
+        "prettier-plugin-tailwindcss": "^0.3.0",
         "react-test-renderer": "^18.2.0",
         "style-loader": "^3.3.3",
         "tailwindcss": "^3.3.2",
