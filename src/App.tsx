@@ -3,7 +3,6 @@ import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import { Home } from './pages';
 import { Page1 } from './pages/page1';
 import { Page2 } from './pages/page2';
-import './index.css';
 import { Page3 } from './pages/page3';
 
 export const App: React.FC = () => {
@@ -19,7 +18,7 @@ export const App: React.FC = () => {
             <nav>
                 <ul>
                     {routes.map(({ url, name }) => (
-                        <li>
+                        <li key={url}>
                             <Link to={url}>{name}</Link>
                         </li>
                     ))}
@@ -27,7 +26,7 @@ export const App: React.FC = () => {
             </nav>
             <Routes>
                 {routes.map(({ url, Element }) => (
-                    <Route path={url} element={<Element />} />
+                    <Route key={url} path={url} element={<Element />} />
                 ))}
             </Routes>
         </BrowserRouter>
