@@ -21,31 +21,37 @@ export const DialogProvider: React.FC<Props_DialogProvider> = ({ children }) => 
     const [isOpen, setIsOpen] = React.useState(false);
     const [message, setMessage] = React.useState('');
 
-    /**
-     * 開啟 Dialog 視窗
-     * @param message 要顯示 Dialog 中的文字內容
-     */
-    const open = (message?: string) => {
-        setIsOpen(true);
-        if (message !== undefined) {
-            setMessage(message);
-        }
-    };
-
-    /**
-     * 關閉 Dialog 視窗
-     * @returns
-     */
-    const close = () => setIsOpen(false);
-
-    /**
-     * 切換 Dialog 視窗
-     * @returns
-     */
-    const toggle = () => setIsOpen((s) => !s);
-
     return (
-        <DialogContext.Provider value={{ isOpen, message, dialogAPI: { open, close, toggle } }}>
+        <DialogContext.Provider
+            value={React.useMemo(
+                () => ({
+                    isOpen,
+                    message,
+                    dialogAPI: {
+                        /**
+                         * 開啟 Dialog 視窗
+                         * @param message 要顯示 Dialog 中的文字內容
+                         */
+                        open: (message?: string) => {
+                            setIsOpen(true);
+                            if (message !== undefined) {
+                                setMessage(message);
+                            }
+                        },
+                        /**
+                         * 關閉 Dialog 視窗
+                         * @returns
+                         */
+                        close: () => setIsOpen(false),
+                        /**
+                         * 切換 Dialog 視窗
+                         * @returns
+                         */
+                        toggle: () => setIsOpen((s) => !s),
+                    },
+                }),
+                [isOpen, message],
+            )}>
             {children}
         </DialogContext.Provider>
     );
