@@ -4,6 +4,7 @@ import { Home } from './pages';
 import { Page1 } from './pages/page1';
 import { Page2 } from './pages/page2';
 import { Page3 } from './pages/page3';
+import { Page4 } from './pages/page4';
 
 export const App: React.FC = () => {
     const routes = [
@@ -11,6 +12,7 @@ export const App: React.FC = () => {
         { url: '/page1', name: 'Page1', Element: Page1 },
         { url: '/page2', name: 'Page2', Element: Page2 },
         { url: '/page3', name: 'Page3', Element: Page3 },
+        { url: '/page4', name: 'Page4', Element: Page4 },
     ];
 
     return (
