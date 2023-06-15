@@ -10,30 +10,45 @@ import { FC, useEffect, useState } from 'react';
  * ): Promise<ProductServerResp[]> => { //...省略 };
  */
 import { getProducts } from '@/components/Page4Loader';
+import { useDebounceFn } from '@/hooks/useDebounce';
 
-const App: FC = () => {
-    //0:data not ready, 1:loading, 2:error
+export const Page4: FC = () => {
+    // 0:data not ready, 1:loading, 2:error
     const [products, setProducts] = useState<number | ProductServerResp[]>(0);
     const [sortKey, setSortKey] = useState('price');
     const [keyword, setKeyword] = useState('');
     const [minPrice, setMinPrice] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
     const [args, setArgs] = useState([keyword, minPrice, maxPrice]);
+
+    // 病症1 因使用 debounce 函式避免多次執行 setProducts
+    const [updateProducts, clearTimer] = useDebounceFn(
+        () => {
+            setProducts(1);
+            const [keyword, minPrice, maxPrice] = args;
+            getProducts(
+                keyword || undefined,
+                minPrice === '' || isNaN(+minPrice) ? undefined : +minPrice,
+                maxPrice === '' || isNaN(+maxPrice) ? undefined : +maxPrice,
+            )
+                .then((resp) => {
+                    setProducts(resp);
+                })
+                .catch(() => setProducts(2));
+        },
+        args,
+        200,
+    );
     useEffect(() => {
-        setProducts(1);
-        const [keyword, minPrice, maxPrice] = args;
-        getProducts(
-            keyword || undefined,
-            minPrice === '' || isNaN(+minPrice) ? undefined : +minPrice,
-            maxPrice === '' || isNaN(+maxPrice) ? undefined : +maxPrice,
-        )
-            .then((resp) => {
-                setProducts(resp);
-            })
-            .catch(() => setProducts(2));
+        updateProducts();
+        return () => clearTimer();
     }, args);
-    const sortedProducts = typeof products == 'number' ? [] : sortProduct(products, sortKey);
-    0;
+
+    // 病症2 應 useMemo 記憶排序後的 products 結果
+    const sortedProducts = React.useMemo(
+        () => (typeof products == 'number' ? [] : sortProduct(products, sortKey)),
+        [products, sortKey],
+    );
 
     const keywordHandler = React.useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => setKeyword(e.target.value),
@@ -85,6 +100,7 @@ const App: FC = () => {
     );
 };
 
+// 病症3 應使用 React.memo 記憶化元件，避免作為子元件被頻繁渲染
 export const ProductTable: FC<{ data: ProductServerResp[] }> = React.memo(({ data }) => {
     return (
         <table>
@@ -103,6 +119,7 @@ export const ProductTable: FC<{ data: ProductServerResp[] }> = React.memo(({ dat
             </thead>
             <tbody>
                 {data.map((d) => (
+                    // 病症 4 對於 map 創建的元素，因添加 key 來提升性能。
                     <tr key={d.id}>
                         <td>{d.id}</td>
                         <td>{d.sn}</td>
@@ -134,5 +151,3 @@ const getDataStatus = (code: number) => {
             return '資料讀取失敗';
     }
 };
-
-export const Page4 = App;
