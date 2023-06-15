@@ -85,7 +85,7 @@ const App: FC = () => {
     );
 };
 
-export const ProductTable: FC<{ data: ProductServerResp[] }> = ({ data }) => {
+export const ProductTable: FC<{ data: ProductServerResp[] }> = React.memo(({ data }) => {
     return (
         <table>
             <thead>
@@ -103,7 +103,7 @@ export const ProductTable: FC<{ data: ProductServerResp[] }> = ({ data }) => {
             </thead>
             <tbody>
                 {data.map((d) => (
-                    <tr>
+                    <tr key={d.id}>
                         <td>{d.id}</td>
                         <td>{d.sn}</td>
                         <td>{d.name}</td>
@@ -118,7 +118,7 @@ export const ProductTable: FC<{ data: ProductServerResp[] }> = ({ data }) => {
             </tbody>
         </table>
     );
-};
+});
 
 const sortProduct = (input: ProductServerResp[], sortKey: string): ProductServerResp[] => {
     return input.sort((a, b) => b[sortKey] - a[sortKey]);
